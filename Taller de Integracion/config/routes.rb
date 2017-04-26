@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :balances
+  resources :transactions
   resources :store_houses
   resources :products
   resources :bills

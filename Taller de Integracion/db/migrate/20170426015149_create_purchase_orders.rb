@@ -5,7 +5,7 @@ class CreatePurchaseOrders < ActiveRecord::Migration[5.0]
       t.string :channel
       t.string :supplier
       t.string :client
-      t.string :Sku
+      t.string :sku
       t.integer :quantity
       t.integer :dispatchedQuantity
       t.integer :unitPrice

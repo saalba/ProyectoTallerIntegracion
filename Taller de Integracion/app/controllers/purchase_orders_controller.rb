@@ -4,7 +4,6 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders
   def index
     @purchase_orders = PurchaseOrder.all
-
     render json: @purchase_orders
   end
 
@@ -14,13 +13,15 @@ class PurchaseOrdersController < ApplicationController
   end
 
   # POST /purchase_orders
+  #{"channel": "b2b","supplier": "grupo 1","client": "grupo 2",	"Sku": "atf1233","quantity": 2,"unitPrice": 3000,"Deadline": "17 / 10 / 2017"}
+
   def create
     @purchase_order = PurchaseOrder.new(purchase_order_params)
 
     if @purchase_order.save
-      render json: @purchase_order, status: :created, location: @purchase_order
+      render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "Acepted", "Notes": "In progress","billId": "sck2"}', status: 202, location: @purchase_order
     else
-      render json: @purchase_order.errors, status: :unprocessable_entity
+      render json: {error: 'Incomplete order data'}, status: 400
     end
   end
 

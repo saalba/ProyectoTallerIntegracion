@@ -4,8 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   def index
     @products = Product.all
-
-    render json: @products
+    render json: '{"products": [{"id": 1, "sku": "atf1233", "name": "Shovel", "price": 3000, "stock": 7},{"id": 2, "sku": "SCS1343", "name": "Bucket", "price": 2000, "stock": 2},{"id": 3, "sku": "att1233", "name": "T-Shirt", "price": 9000, "stock": 8}]}', status: 200
   end
 
   # GET /products/1
