@@ -11,21 +11,28 @@ class PurchaseOrdersController < ApplicationController
   def show
     render json: @purchase_order
   end
-
-  # POST /purchase_orders
-  #{"channel": "b2b","supplier": "grupo 1","client": "grupo 2",	"Sku": "atf1233","quantity": 2,"unitPrice": 3000,"Deadline": "17 / 10 / 2017"}
-
-  def create
-    @purchase_order = PurchaseOrder.new(purchase_order_params)
-
-    if @purchase_order.save
-      render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "Acepted", "Notes": "In progress","billId": "sck2"}', status: 202, location: @purchase_order
-    else
-      render json: {error: 'Incomplete order data'}, status: 400
-    end
+  # PATCH /purchase_orders/1/acepted
+  def acepted
+    render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "acepted", "Notes": "In progress","billId": "sck2"}', status: 202
   end
 
-  # PATCH/PUT /purchase_orders/1
+  # PATCH /purchase_orders/1/rejected
+  def rejected
+    render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "rejected", "Notes": "In progress","billId": "sck2"}', status: 202
+  end
+
+  # PUT /purchase_orders
+  def create
+    #@purchase_order = PurchaseOrder.new(purchase_order_params)
+
+    #if @purchase_order.save
+      render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "created", "Notes": "In progress","billId": "sck2"}', status: 202, location: @purchase_order
+    #else
+    #  render json: {error: 'Incomplete order data'}, status: 400
+    #end
+  end
+
+  # /purchase_orders/1
   def update
     if @purchase_order.update(purchase_order_params)
       render json: @purchase_order
@@ -36,7 +43,11 @@ class PurchaseOrdersController < ApplicationController
 
   # DELETE /purchase_orders/1
   def destroy
-    @purchase_order.destroy
+    #if(params[:orderId].present?)
+      render json: { "cancelled": 'Order qsda1 cancelled'}, status: 202
+    #else
+    #  render json: {error: 'Order id not found'}, status: 404
+    #end
   end
 
   private
