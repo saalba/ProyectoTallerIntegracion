@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   match "/invoices/:id/rejected" => "bills#rejected", via: :patch
   match "/invoices/:id/delivered" => "bills#delivered", via: :patch
   match "/invoices/:id/paid" => "bills#paid", via: :patch
+  match "/invoices/:id/paid" => "bills#paid", via: :patch
+  match "/token" => "application#token", via: :get
   resources :balances
   resources :transactions
   resources :store_houses

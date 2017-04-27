@@ -13,12 +13,20 @@ class PurchaseOrdersController < ApplicationController
   end
   # PATCH /purchase_orders/1/acepted
   def acepted
-    render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "acepted", "Notes": "In progress","billId": "sck2"}', status: 202
+    if params[:token].present?
+      render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "acepted", "Notes": "In progress","billId": "sck2"}', status: 202
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
   end
 
   # PATCH /purchase_orders/1/rejected
   def rejected
-    render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "rejected", "Notes": "In progress","billId": "sck2"}', status: 202
+    if params[:token].present?
+      render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "rejected", "Notes": "In progress","billId": "sck2"}', status: 202
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
   end
 
   # PUT /purchase_orders
@@ -26,7 +34,11 @@ class PurchaseOrdersController < ApplicationController
     #@purchase_order = PurchaseOrder.new(purchase_order_params)
 
     #if @purchase_order.save
+    if params[:token].present?
       render json: '{"orderId": "qsda1", "created_at": "2017-04-26T17:03:36.154Z","channel": "b2b","supplier": "grupo 1","client": "grupo 2", "Sku": "atf1233","quantity": 2, "dispatchedQuantity": "0","unitPrice": 3000, "Deadline": "17 / 10 / 2017", "state": "created", "Notes": "In progress","billId": "sck2"}', status: 202, location: @purchase_order
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
     #else
     #  render json: {error: 'Incomplete order data'}, status: 400
     #end
@@ -44,7 +56,11 @@ class PurchaseOrdersController < ApplicationController
   # DELETE /purchase_orders/1
   def destroy
     #if(params[:orderId].present?)
+    if params[:token].present?
       render json: { "cancelled": 'Order qsda1 cancelled'}, status: 202
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
     #else
     #  render json: {error: 'Order id not found'}, status: 404
     #end

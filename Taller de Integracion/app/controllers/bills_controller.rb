@@ -13,29 +13,42 @@ class BillsController < ApplicationController
     render json: @bill
   end
 
-  # POST /bills
+  # PUT /bills
   def create
     #@bill = Bill.new(bill_params)
     #if @bill.save
+    if params[:token].present?
       render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
-    #else
-    #  render json: @bill.errors, status: :unprocessable_entity
-    #end
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
   end
 
   #PUT /bills/1/acepted
   def acepted
-    render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"paymentStatus": "pendiente","Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
+    if params[:token].present?
+      render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"paymentStatus": "pendiente","Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
   end
 
   #PUT /bills/1/rejected
   def rejected
-    render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"paymentStatus": "rechazado","Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
+    if params[:token].present?
+      render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"paymentStatus": "rechazado","Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
   end
 
   #PUT /bills/1/paid
   def paid
-    render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"paymentStatus": "paid","Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
+    if params[:token].present?
+      render json: '{"supplier": "grupo 1","client": "grupo 2","grossValue": 3000,"Iva": 300,"totalValue": 3300,"paymentStatus": "paid","Deadline": "17 / 10 / 2017","orderId": "qsda1","RejectionCause": "","CancellationCause": ""}', status: 202
+    else
+      render json: {"error": "Token needed" }, status: 403
+    end
   end
 
 
