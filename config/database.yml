@@ -81,5 +81,6 @@ test:
 production:
   <<: *default
   database: Taller_de_Integracion_production
-  username: Taller_de_Integracion
-  password: <%= ENV['TALLER_DE_INTEGRACION_DATABASE_PASSWORD'] %>
+  username: postgres
+  password:
+  host: db
